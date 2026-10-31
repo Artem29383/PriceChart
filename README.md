@@ -5,6 +5,46 @@ An interactive, TradingView-style **line/area** chart learning project.
 **Current state: starter scaffold only.** The chart is intentionally **not implemented**.
 We will build Canvas rendering, axes, pan, zoom, crosshair and a reusable TypeScript API together, lesson by lesson.
 
+## Second chart: independent production-style Canvas reference
+
+The demo now renders **two separate components** side by side in the codebase (stacked in the UI):
+
+1. `src/chart/react/PriceChart.tsx` — the student's existing implementation, untouched by the reference engine.
+2. `src/chart/reference/ReferencePriceChart.tsx` — a standalone, reusable `ReferencePriceChart<T>` with its own `model.ts`, `render.ts`, styles and unit tests.
+
+The reference component accepts data with arbitrary record keys (through typed `getTime` and `getValue`), normalizes/sorts timestamps without mutating caller data, treats duplicate timestamps as last-write-wins, and renders using **Canvas 2D** (no prebuilt chart engine).
+
+It includes:
+- price/date axes with readable ticks, purple line + area fill and latest-price label;
+- HiDPI and ResizeObserver handling, viewport culling and two Canvas layers;
+- drag-to-pan, smooth wheel zoom anchored to cursor, pointer capture, crosshair, hovered-point tooltip;
+- keyboard navigation (focus chart then arrow keys, +/−, Home/End);
+- Dark / Light / Colorful themes and 1D / 1W / 1M / 1Y / ALL time presets;
+- loading older records from a caller-provided `onLoadOlder(beforeTimestamp)` callback, preserving position when history is prepended;
+- optional typed `onHover(point | null)`, empty values, null gaps and invalid number handling.
+
+Example:
+
+```tsx
+import { ReferencePriceChart } from './chart/reference/ReferencePriceChart';
+
+<ReferencePriceChart
+  data={prices}
+  getTime={(point) => point.timestamp}
+  getValue={(point) => point.close}
+  theme="dark"
+  height={500}
+  onLoadOlder={async (beforeTimestamp) => {
+    // Fetch older prices in your application and prepend them to `prices`.
+    // The chart intentionally never calls a vendor API on its own.
+  }}
+/>
+```
+
+**Data provider:** the included demo uses deterministic offline mock prices. To display real historical prices, integrate a licensed provider *outside* the chart and pass the updated dataset. A backend/vendor service and API keys are intentionally not bundled.
+
+**Quality checks:** `npm run typecheck && npm run lint && npm run test && npm run build`. CI runs these checks on push.
+
 ## Stack
 
 - React 19 + TypeScript (strict, noUncheckedIndexedAccess)

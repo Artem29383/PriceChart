@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 
 import type { ChartTheme } from '../chart/core/types';
 import { PriceChart } from '../chart/react/PriceChart';
+import { ReferencePriceChart } from '../chart/reference/ReferencePriceChart';
+import '../chart/reference/showcase.css';
 import { generateMockPrices } from '../demo/data/generateMockPrices';
 
 const THEMES: readonly ChartTheme[] = ['dark', 'light', 'colorful'];
@@ -15,6 +17,7 @@ export function App() {
   return (
     <main className="app-shell">
       <section className="workbench">
+        <h2 className="chart-showcase__title">01 / Your chart · learning implementation</h2>
         <div className="preview-panel">
           <div className="preview-panel__toolbar">
             <div>
@@ -44,6 +47,17 @@ export function App() {
             height={420}
           />
         </div>
+
+        <h2 className="chart-showcase__title chart-showcase__title--reference">
+          02 / Reference chart · complete Canvas implementation
+        </h2>
+        <ReferencePriceChart
+          data={prices}
+          getTime={(item) => item.timestamp}
+          getValue={(item) => item.close}
+          theme={theme}
+          height={510}
+        />
       </section>
     </main>
   );

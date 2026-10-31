@@ -1,0 +1,123 @@
+.reference-chart {
+  --rc-border: #34344d;
+  --rc-surface: #0b0d18;
+  --rc-text: #f1edff;
+  --rc-muted: #979bb4;
+  --rc-primary: #9f76ff;
+  color: var(--rc-text);
+  background: var(--rc-surface);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--rc-border);
+}
+.reference-chart[data-theme='light'] {
+  --rc-border: #ded8eb;
+  --rc-surface: #f9f8ff;
+  --rc-text: #26223b;
+  --rc-muted: #777188;
+  --rc-primary: #7447de;
+}
+.reference-chart[data-theme='colorful'] {
+  --rc-border: #5a407b;
+  --rc-surface: #17102b;
+  --rc-text: #fff6df;
+  --rc-muted: #bda9ce;
+  --rc-primary: #e7a5fc;
+}
+.reference-chart__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 18px 22px 10px;
+}
+.reference-chart__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.reference-chart__eyebrow {
+  font-size: 10px;
+  color: var(--rc-primary);
+  font-weight: 700;
+  letter-spacing: 1.1px;
+}
+.reference-chart__heading strong {
+  font-size: 19px;
+  letter-spacing: -.3px;
+}
+.reference-chart__latest {
+  color: var(--rc-primary);
+  font-variant-numeric: tabular-nums;
+  margin-left: 8px;
+}
+.reference-chart__ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 4px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--rc-muted) 12%, transparent);
+}
+.reference-chart__ranges button {
+  cursor: pointer;
+  color: var(--rc-muted);
+  border: 0;
+  border-radius: 7px;
+  padding: 9px 11px;
+  font: 600 12px system-ui, sans-serif;
+  background: transparent;
+}
+.reference-chart__ranges button:hover {
+  color: var(--rc-text);
+}
+.reference-chart__ranges button.is-selected {
+  color: white;
+  background: #6540d7;
+}
+.reference-chart__ranges button:focus-visible,
+.reference-chart__interactive:focus-visible {
+  outline: 2px solid var(--rc-primary);
+  outline-offset: -3px;
+}
+.reference-chart__surface {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  background: var(--rc-surface);
+}
+.reference-chart__canvas {
+  position: absolute;
+  display: block;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.reference-chart__interactive {
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+}
+.reference-chart__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 20px;
+  border-top: 1px solid var(--rc-border);
+  padding: 12px 22px;
+  color: var(--rc-muted);
+  font-size: 11px;
+}
+.reference-chart__error {
+  margin: 0;
+  padding: 10px 22px;
+  font-size: 12px;
+  color: #ff9ca5;
+}
+@media (max-width: 560px) {
+  .reference-chart__toolbar { padding: 14px 12px 10px; }
+  .reference-chart__footer { padding: 12px; }
+  .reference-chart__heading strong { font-size: 16px; }
+  .reference-chart__ranges button { padding: 8px 10px; }
+}
