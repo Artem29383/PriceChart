@@ -76,7 +76,7 @@ export const OptimizedPlot = memo(function OptimizedPlot({
   const valueRef = useRef<HTMLElement>(null);
   const tickRef = useRef<HTMLElement>(null);
 
-  const color = COLORS[series.id % COLORS.length] ?? COLORS[0];
+  const color = COLORS[series.id % COLORS.length] ?? '#ad95ff';
   const initial = dynamicLast(series, 0).toFixed(1);
 
   useEffect(() => {
