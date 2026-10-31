@@ -59,7 +59,7 @@ export function PerformanceMonitor({ counters, running, onSafetyPause }: Monitor
         observer.observe({ type: 'longtask', buffered: false });
         supportedLongTasks = true;
       } catch {
-        observer.disconnect();
+        observer?.disconnect();
         observer = null;
       }
     }
