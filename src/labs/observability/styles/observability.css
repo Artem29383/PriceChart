@@ -1,0 +1,186 @@
+.observability-lab {
+  padding: 35px 0 28px;
+  color: #eaeafa;
+}
+.observability-lab__intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.observability-lab__eyebrow {
+  color: #b096ff;
+  font-size: 11px;
+  letter-spacing: 1.3px;
+  font-weight: 800;
+  margin: 0 0 9px;
+}
+.observability-lab__intro h1 {
+  margin: 0 0 12px;
+  font-size: clamp(28px, 3.8vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -1.1px;
+}
+.observability-lab__intro p:not(.observability-lab__eyebrow) {
+  margin: 0;
+  color: #999cb6;
+  max-width: 720px;
+  line-height: 1.7;
+  font-size: 13px;
+}
+.observability-lab__status {
+  flex: none;
+  border: 1px solid #534075;
+  color: #c0aeff;
+  background: #211b35;
+  border-radius: 8px;
+  font-size: 10px;
+  padding: 10px 12px;
+  letter-spacing: .7px;
+  font-weight: 700;
+}
+.observability-lab__facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 28px 0 36px;
+}
+.observability-lab__facts > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 17px;
+  border: 1px solid #333344;
+  border-radius: 12px;
+  background: #11121e;
+}
+.observability-lab__facts span {
+  font-size: 11px;
+  color: #8d93ad;
+}
+.observability-lab__facts strong {
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+.observability-lab__section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.observability-lab__section-header h2 {
+  font-size: 21px;
+  margin: 0;
+}
+.observability-lab__section-header > span {
+  font-size: 11px;
+  color: #8f92aa;
+}
+.observability-lab__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+.observability-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 20px;
+  min-height: 295px;
+  border: 1px solid #353448;
+  border-radius: 14px;
+  background: #11121e;
+}
+.observability-panel__header,
+.observability-panel__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+.observability-panel__metric {
+  color: #9577ea;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+.observability-panel h3 {
+  margin: 7px 0 0;
+  font-size: 15px;
+}
+.observability-panel__kind {
+  border: 1px solid #4f426a;
+  border-radius: 6px;
+  padding: 5px 8px;
+  color: #bdafe4;
+  font-size: 10px;
+}
+.observability-panel__summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin: 19px 0;
+}
+.observability-panel__summary strong {
+  font-size: 28px;
+  font-variant-numeric: tabular-nums;
+}
+.observability-panel__summary small { font-size: 12px; color: #a1a3bc; }
+.observability-panel__summary > span { color: #858ca4; font-size: 11px; }
+.observability-panel__placeholder {
+  flex: 1;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  border-radius: 9px;
+  border: 1px dashed #414055;
+  background: #151525;
+  padding: 12px;
+}
+.observability-panel__icon { color: #70579b; font-size: 23px; }
+.observability-panel__placeholder strong { font-size: 12px; color: #bcb5d4; }
+.observability-panel__placeholder p { font-size: 11px; color: #898aa4; margin: 0; }
+.observability-panel__footer {
+  color: #898ca4;
+  margin-top: 17px;
+  font-size: 10px;
+  flex-wrap: wrap;
+}
+.observability-lab__next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid #4c3b77;
+  background: #181329;
+}
+.observability-lab__next h2 { font-size: 19px; margin: 0 0 9px; }
+.observability-lab__next p { color: #a59bbd; line-height: 1.6; max-width: 740px; margin: 0; font-size: 12px; }
+.observability-lab__next a {
+  text-decoration: none;
+  border: 1px solid #745cac;
+  color: #e1d6ff;
+  padding: 11px 15px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.observability-lab__next a:hover { background: #2a2245; }
+.observability-lab__next a:focus-visible { outline: 2px solid #b5a0ff; outline-offset: 3px; }
+@media (max-width: 760px) {
+  .observability-lab__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .observability-lab__grid { grid-template-columns: 1fr; }
+}

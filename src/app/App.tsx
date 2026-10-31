@@ -1,64 +1,67 @@
-import { useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
-import type { ChartTheme } from '../chart/core/types';
-import { PriceChart } from '../chart/react/PriceChart';
-import { ReferencePriceChart } from '../chart/reference/ReferencePriceChart';
-import '../chart/reference/showcase.css';
-import { generateMockPrices } from '../demo/data/generateMockPrices';
+import { ObservabilityLab } from '../labs/observability/ObservabilityLab';
+import './navigation.css';
 
-const THEMES: readonly ChartTheme[] = ['dark', 'light', 'colorful'];
+// Load the chart demo only when explicitly visiting it.
+const ChartsPage = lazy(() =>
+  import('./ChartsPage').then(({ ChartsPage: page }) => ({ default: page })),
+);
 
+type Workspace = 'observability' | 'charts';
+
+function workspaceFromHash(hash: string): Workspace {
+  return hash === '#/charts' ? 'charts' : 'observability';
+}
+
+/** Navigation is independent of React Router and works on the Vite dev server. */
 export function App() {
-  const [theme, setTheme] = useState<ChartTheme>('dark');
+  const [workspace, setWorkspace] = useState<Workspace>(() =>
+    workspaceFromHash(window.location.hash),
+  );
 
-  // Stable data across UI state changes.
-  const prices = useMemo(() => generateMockPrices(320, 42), []);
+  useEffect(() => {
+    const handleNavigation = () => setWorkspace(workspaceFromHash(window.location.hash));
+    window.addEventListener('hashchange', handleNavigation);
+    return () => window.removeEventListener('hashchange', handleNavigation);
+  }, []);
 
   return (
     <main className="app-shell">
-      <section className="workbench">
-        <h2 className="chart-showcase__title">01 / Your chart · learning implementation</h2>
-        <div className="preview-panel">
-          <div className="preview-panel__toolbar">
-            <div>
-              <p className="ticker">DEMO / STOCK</p>
-              <strong>Example price history</strong>
-              <small>320 synthetic daily observations · offline</small>
-            </div>
+      <header className="workspace-header">
+        <a className="workspace-brand" href="#/observability" aria-label="PriceChart Workspace — начало">
+          <span className="workspace-brand__mark">P</span>
+          <span>
+            <strong>Frontend Engineering Lab</strong>
+            <small>PriceChart · Cloud X practice</small>
+          </span>
+        </a>
 
-            <div className="theme-toggle" role="group" aria-label="Chart theme">
-              {THEMES.map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  className={item === theme ? 'is-selected' : undefined}
-                  onClick={() => setTheme(item)}
-                >
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
-          <PriceChart
-            data={prices}
-            getTime={(item) => item.timestamp}
-            getValue={(item) => item.close}
-            theme={theme}
-            height={420}
-          />
-        </div>
+        <nav className="workspace-nav" aria-label="Лаборатории">
+          <a
+            href="#/observability"
+            className={workspace === 'observability' ? 'is-active' : undefined}
+            aria-current={workspace === 'observability' ? 'page' : undefined}
+          >
+            Observability Lab
+          </a>
+          <a
+            href="#/charts"
+            className={workspace === 'charts' ? 'is-active' : undefined}
+            aria-current={workspace === 'charts' ? 'page' : undefined}
+          >
+            Price Charts
+          </a>
+        </nav>
+      </header>
 
-        <h2 className="chart-showcase__title chart-showcase__title--reference">
-          02 / Reference chart · complete Canvas implementation
-        </h2>
-        <ReferencePriceChart
-          data={prices}
-          getTime={(item) => item.timestamp}
-          getValue={(item) => item.close}
-          theme={theme}
-          height={510}
-        />
-      </section>
+      {workspace === 'observability' ? (
+        <ObservabilityLab />
+      ) : (
+        <Suspense fallback={<p className="workspace-loading">Загружаем графики…</p>}>
+          <ChartsPage />
+        </Suspense>
+      )}
     </main>
   );
 }

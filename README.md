@@ -1,9 +1,24 @@
 # PriceChart — Build a reusable line/area trading chart from scratch
 
-An interactive, TradingView-style **line/area** chart learning project.
+One repository with two independent labs: interactive **Price Charts** and a new
+**Observability Dashboard Lab** for practicing frontend architecture, TypeScript,
+configurable panels and monitoring UI.
 
-**Current state: starter scaffold only.** The chart is intentionally **not implemented**.
-We will build Canvas rendering, axes, pan, zoom, crosshair and a reusable TypeScript API together, lesson by lesson.
+The Price Charts demo includes both the student's implementation and a separate
+Canvas reference implementation. The Observability lab begins with typed offline
+fixtures and empty panels so the dashboard builder can be implemented lesson by lesson.
+
+## Choose a lab
+
+After `npm run dev`, open:
+
+- **Observability Lab:** http://127.0.0.1:5173/#/observability (default)
+- **Price Charts:** http://127.0.0.1:5173/#/charts
+
+The page has navigation between both independent labs. The chart demo is lazy-loaded
+and does not render when you are working in Observability.
+
+Read [the Observability learning plan](docs/OBSERVABILITY_LAB.md) for the next exercises.
 
 ## Second chart: independent production-style Canvas reference
 
@@ -98,17 +113,18 @@ If a proxy/VPN still breaks local access:
 
 ```text
 src/
-  app/                 React application shell
-  chart/
-    core/              Shared types; other subsystems added as lessons progress
-    react/             Generic <PriceChart<T>> placeholder
+  app/                 Navigation and charts page
+  chart/               Both financial chart implementations
+  labs/
+    observability/      Dashboard builder laboratory (isolated)
   demo/
     data/              Deterministic synthetic daily stock history
   styles/              Demo-only styles
   test/                Test utilities
 docs/
-  LEARNING_PLAN.md     Full stage-by-stage roadmap
-  NEW_CHAT_PROMPT.md   Paste into a new ChatGPT conversation
+  LEARNING_PLAN.md     Original chart roadmap
+  NEW_CHAT_PROMPT.md   Original chart learning prompt
+  OBSERVABILITY_LAB.md Dashboard builder curriculum
 ```
 
 ## Learning rules
