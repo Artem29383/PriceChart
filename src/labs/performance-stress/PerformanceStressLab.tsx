@@ -155,17 +155,26 @@ export function PerformanceStressLab() {
       <div className="stress-controls">
         <div className="stress-controls__fields">
           <label>Графиков
-            <select value={draft.panels} onChange={(event) => setDraft((prev) => ({ ...prev, panels: Number(event.currentTarget.value) }))}>
+            <select value={draft.panels} onChange={(event) => {
+              const panels = Number(event.currentTarget.value);
+              setDraft((prev) => ({ ...prev, panels }));
+            }}>
               {PANEL_OPTIONS.map((value) => <option key={value} value={value}>{value}</option>)}
             </select>
           </label>
           <label>Точек на график
-            <select value={draft.pointsPerPanel} onChange={(event) => setDraft((prev) => ({ ...prev, pointsPerPanel: Number(event.currentTarget.value) }))}>
+            <select value={draft.pointsPerPanel} onChange={(event) => {
+              const pointsPerPanel = Number(event.currentTarget.value);
+              setDraft((prev) => ({ ...prev, pointsPerPanel }));
+            }}>
               {POINT_OPTIONS.map((value) => <option key={value} value={value}>{value.toLocaleString('ru-RU')}</option>)}
             </select>
           </label>
           <label>Интервал обновления
-            <select value={draft.intervalMs} onChange={(event) => setDraft((prev) => ({ ...prev, intervalMs: Number(event.currentTarget.value) }))}>
+            <select value={draft.intervalMs} onChange={(event) => {
+              const intervalMs = Number(event.currentTarget.value);
+              setDraft((prev) => ({ ...prev, intervalMs }));
+            }}>
               {UPDATE_OPTIONS.map((value) => <option key={value} value={value}>{value < 1000 ? `${value} мс` : `${value / 1000} с`}</option>)}
             </select>
           </label>
