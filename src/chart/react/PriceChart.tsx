@@ -1,9 +1,9 @@
 import type { ChartTheme } from '../core/types';
+import { useEffect, useRef } from 'react';
+import { getPriceDomain } from '../core/getPriceDomain.ts';
+import { prepareCanvas } from '../core/prepareCanvas.ts';
+import { renderPoints } from '../core/renderPoints.ts';
 
-/**
- * Reusable, generic public API. T is inferred from the caller's data.
- * External records do not need specific property names for date or price.
- */
 export interface PriceChartProps<T> {
   data: readonly T[];
   getTime: (item: T) => number;
@@ -13,10 +13,6 @@ export interface PriceChartProps<T> {
   className?: string;
 }
 
-/**
- * Intentional blank starter: no graph implementation or fake chart.
- * We'll implement Canvas and its lifecycle together in the next chat.
- */
 export function PriceChart<T>({
   data,
   getTime,
@@ -27,23 +23,37 @@ export function PriceChart<T>({
 }: PriceChartProps<T>) {
   const firstPoint = data[0];
   const lastPoint = data[data.length - 1];
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const firstTime = firstPoint === undefined ? null : getTime(firstPoint);
   const latestValue = lastPoint === undefined ? null : getValue(lastPoint);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+
+    if (!ctx) return;
+
+    const domain = getPriceDomain(data, getValue);
+    const {plotHeight, padding, plotWidth} = prepareCanvas(canvas, ctx);
+
+    if (!domain) return;
+
+    const { minPrice, maxPrice } = domain;
+    renderPoints(ctx, data, getValue, padding, plotHeight, plotWidth, maxPrice, minPrice);
+  }, [data, getValue]);
 
   return (
     <section
       className={['price-chart', className].filter(Boolean).join(' ')}
       data-theme={theme}
       style={{ height }}
-      aria-label="Price chart (not implemented yet)"
+      aria-label="Price chart"
     >
       <div className="price-chart__pending">
-        <div className="price-chart__glyph" aria-hidden="true">◇</div>
-
-        <strong>Canvas renderer: not implemented</strong>
-        <span>We'll build the line, axes, gradient, drag and zoom together.</span>
-
+        <canvas ref={canvasRef} />
         <div className="price-chart__debug">
           <span>samples: {data.length}</span>
           <span>first timestamp: {firstTime ?? '—'}</span>
