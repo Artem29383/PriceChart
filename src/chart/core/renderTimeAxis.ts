@@ -1,3 +1,6 @@
+import type { ChartViewport } from './types.ts';
+import { indexToX } from './indexToX.ts';
+
 const dateFormatter = new Intl.DateTimeFormat('ru-RU', {
   day: '2-digit',
   month: 'short',
@@ -12,6 +15,7 @@ export function renderTimeAxis<T>(
   padding: number,
   plotWidth: number,
   plotHeight: number,
+  viewport: ChartViewport,
 ) {
   if (data.length === 0) return;
 
@@ -27,7 +31,7 @@ export function renderTimeAxis<T>(
 
   for (let i = 0; i < tickCount; i++) {
     const ratio = i / (tickCount - 1);
-    const index = Math.round(ratio * (data.length - 1));
+    const index = Math.round(viewport.startIndex + ratio * (viewport.visibleCount - 1));
 
     const point = data[index];
     if (point === undefined) continue;
@@ -38,7 +42,7 @@ export function renderTimeAxis<T>(
     const date = new Date(timestamp);
     if (Number.isNaN(date.getTime())) continue;
 
-    const x = padding + ratio * plotWidth;
+    const x = indexToX(index, viewport, padding, plotWidth);
 
     ctx.beginPath();
     ctx.moveTo(x, axisY);

@@ -1,3 +1,6 @@
+import type { ChartViewport } from './types.ts';
+import { indexToX } from './indexToX.ts';
+
 export function renderArea<T>(
   ctx: CanvasRenderingContext2D,
   data: readonly T[],
@@ -7,6 +10,7 @@ export function renderArea<T>(
   plotWidth: number,
   maxPrice: number,
   minPrice: number,
+  viewport: ChartViewport,
 ) {
   const baseline = padding + plotHeight;
 
@@ -46,8 +50,7 @@ export function renderArea<T>(
       continue;
     }
 
-    const x = padding + (index / Math.max(1, data.length - 1)) * plotWidth;
-
+    const x = indexToX(index, viewport, padding, plotWidth);
     const y = padding + ((maxPrice - price) / (maxPrice - minPrice)) * plotHeight;
 
     if (firstX === null) {
