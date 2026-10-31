@@ -20,9 +20,21 @@ const PerformanceStressLab = lazy(() =>
   ),
 );
 
-type Workspace = 'observability' | 'charts' | 'observability-reference' | 'performance-stress';
+const PerformanceOptimizedLab = lazy(() =>
+  import('../labs/performance-optimized/PerformanceOptimizedLab').then(
+    ({ PerformanceOptimizedLab: page }) => ({ default: page }),
+  ),
+);
+
+type Workspace =
+  | 'observability'
+  | 'charts'
+  | 'observability-reference'
+  | 'performance-stress'
+  | 'performance-optimized';
 
 function workspaceFromHash(hash: string): Workspace {
+  if (hash === '#/performance-optimized') return 'performance-optimized';
   if (hash === '#/performance-stress') return 'performance-stress';
   if (hash === '#/charts') return 'charts';
   if (hash === '#/observability-reference') return 'observability-reference';
@@ -75,6 +87,13 @@ export function App() {
             Performance Stress Lab
           </a>
           <a
+            href="#/performance-optimized"
+            className={workspace === 'performance-optimized' ? 'is-active' : undefined}
+            aria-current={workspace === 'performance-optimized' ? 'page' : undefined}
+          >
+            Performance Optimized
+          </a>
+          <a
             href="#/charts"
             className={workspace === 'charts' ? 'is-active' : undefined}
             aria-current={workspace === 'charts' ? 'page' : undefined}
@@ -93,6 +112,10 @@ export function App() {
       ) : workspace === 'performance-stress' ? (
         <Suspense fallback={<p className="workspace-loading">Загружаем нагрузочную лабораторию…</p>}>
           <PerformanceStressLab />
+        </Suspense>
+      ) : workspace === 'performance-optimized' ? (
+        <Suspense fallback={<p className="workspace-loading">Загружаем оптимизированную лабораторию…</p>}>
+          <PerformanceOptimizedLab />
         </Suspense>
       ) : (
         <Suspense fallback={<p className="workspace-loading">Загружаем графики…</p>}>

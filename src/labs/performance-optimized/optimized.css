@@ -1,0 +1,70 @@
+/* All base controls/grid cards reuse the untouched Stress Lab stylesheet. */
+.optimized-stress__badge {
+  color: #8ef4c3;
+  background: #173328;
+  border-color: #38795b;
+}
+.optimized-explainer {
+  margin: 25px 0 18px;
+  padding: 20px 22px;
+  border: 1px solid #385e54;
+  border-radius: 11px;
+  background: #142621;
+}
+.optimized-explainer strong {
+  font-size: 14px;
+  color: #a9f4d0;
+}
+.optimized-explainer__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 20px;
+  margin-top: 14px;
+}
+.optimized-explainer__grid span {
+  font-size: 11px;
+  color: #c9e4d9;
+  line-height: 1.55;
+}
+.optimized-explainer p {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #a9c6ba;
+  margin: 16px 0 11px;
+}
+.optimized-explainer a {
+  display: inline-block;
+  color: #d1bfff;
+  font-size: 12px;
+  text-decoration: none;
+  border-bottom: 1px solid #9b85eb;
+  padding-bottom: 3px;
+}
+.optimized-explainer a:hover {
+  color: white;
+}
+.optimized-canvas {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 128px;
+  margin-top: 15px;
+  contain: layout paint style;
+}
+.optimized-canvas canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+/* Layout containment isolates each widget from the rest of the dashboard. */
+.optimized-panel {
+  contain: layout style;
+}
+@media (max-width: 680px) {
+  .optimized-explainer__grid {
+    grid-template-columns: 1fr;
+  }
+}

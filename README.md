@@ -14,7 +14,8 @@ After `npm run dev`, open:
 
 - **Observability Lab:** http://127.0.0.1:5173/#/observability (default; your learning code)
 - **Observability Reference:** http://127.0.0.1:5173/#/observability-reference (complete independent dashboard)
-- **Performance Stress Lab:** http://127.0.0.1:5173/#/performance-stress (deliberately slow; FPS, React Profiler, long tasks)
+- **Performance Stress Lab (BEFORE):** http://127.0.0.1:5173/#/performance-stress (unchanged baseline)
+- **Performance Optimized (AFTER):** http://127.0.0.1:5173/#/performance-optimized (Canvas, LOD, visible-only rendering, tick bus)
 - **Price Charts:** http://127.0.0.1:5173/#/charts
 
 The page has navigation between both independent labs. The chart demo is lazy-loaded
@@ -25,6 +26,8 @@ The [completed Observability Reference](docs/OBSERVABILITY_REFERENCE.md) is kept
 separate folder and separate lazy-loaded route so you can compare with your own work.
 The [Performance Stress Lab](docs/PERFORMANCE_STRESS.md) deliberately removes
 optimizations in its own isolated route to benchmark how rendering scales.
+The [optimized comparison](docs/PERFORMANCE_OPTIMIZED.md) uses the exact same
+workload generator and profiles, but eliminates expensive repeat SVG work.
 
 ## Second chart: independent production-style Canvas reference
 
