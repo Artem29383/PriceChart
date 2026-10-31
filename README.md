@@ -12,13 +12,16 @@ fixtures and empty panels so the dashboard builder can be implemented lesson by 
 
 After `npm run dev`, open:
 
-- **Observability Lab:** http://127.0.0.1:5173/#/observability (default)
+- **Observability Lab:** http://127.0.0.1:5173/#/observability (default; your learning code)
+- **Observability Reference:** http://127.0.0.1:5173/#/observability-reference (complete independent dashboard)
 - **Price Charts:** http://127.0.0.1:5173/#/charts
 
 The page has navigation between both independent labs. The chart demo is lazy-loaded
 and does not render when you are working in Observability.
 
 Read [the Observability learning plan](docs/OBSERVABILITY_LAB.md) for the next exercises.
+The [completed Observability Reference](docs/OBSERVABILITY_REFERENCE.md) is kept in a
+separate folder and separate lazy-loaded route so you can compare with your own work.
 
 ## Second chart: independent production-style Canvas reference
 

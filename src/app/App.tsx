@@ -8,10 +8,18 @@ const ChartsPage = lazy(() =>
   import('./ChartsPage').then(({ ChartsPage: page }) => ({ default: page })),
 );
 
-type Workspace = 'observability' | 'charts';
+const ObservabilityReference = lazy(() =>
+  import('../labs/observability-reference/ObservabilityReference').then(
+    ({ ObservabilityReference: page }) => ({ default: page }),
+  ),
+);
+
+type Workspace = 'observability' | 'charts' | 'observability-reference';
 
 function workspaceFromHash(hash: string): Workspace {
-  return hash === '#/charts' ? 'charts' : 'observability';
+  if (hash === '#/charts') return 'charts';
+  if (hash === '#/observability-reference') return 'observability-reference';
+  return 'observability';
 }
 
 /** Navigation is independent of React Router and works on the Vite dev server. */
@@ -46,6 +54,13 @@ export function App() {
             Observability Lab
           </a>
           <a
+            href="#/observability-reference"
+            className={workspace === 'observability-reference' ? 'is-active' : undefined}
+            aria-current={workspace === 'observability-reference' ? 'page' : undefined}
+          >
+            Observability Reference
+          </a>
+          <a
             href="#/charts"
             className={workspace === 'charts' ? 'is-active' : undefined}
             aria-current={workspace === 'charts' ? 'page' : undefined}
@@ -57,6 +72,10 @@ export function App() {
 
       {workspace === 'observability' ? (
         <ObservabilityLab />
+      ) : workspace === 'observability-reference' ? (
+        <Suspense fallback={<p className="workspace-loading">Загружаем эталонный дашборд…</p>}>
+          <ObservabilityReference />
+        </Suspense>
       ) : (
         <Suspense fallback={<p className="workspace-loading">Загружаем графики…</p>}>
           <ChartsPage />
