@@ -1,0 +1,252 @@
+@import './reset.css';
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #ecedfa;
+  background: #080912;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-width: 340px;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-shell {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 30px clamp(18px, 4vw, 64px) 36px;
+}
+
+.app-header, .brand, .workbench__top, .preview-panel__toolbar,
+.preview-panel__footer, .app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.app-header {
+  padding-bottom: 28px;
+  border-bottom: 1px solid #292b3c;
+}
+
+.brand {
+  justify-content: flex-start;
+  gap: 13px;
+}
+
+.brand__mark {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: 800;
+  border-radius: 12px;
+  color: white;
+  background: #6236ff;
+}
+
+.brand strong, .brand small {
+  display: block;
+}
+
+.brand strong {
+  font-size: 15px;
+}
+
+.brand small {
+  color: #9093aa;
+  margin-top: 3px;
+  font-size: 11px;
+}
+
+.status-tag, .eyebrow, .ticker {
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  color: #aa92ff;
+  font-weight: 700;
+}
+
+.status-tag {
+  padding: 8px 10px;
+  border: 1px solid #3b3553;
+  border-radius: 7px;
+}
+
+.workbench {
+  padding-top: 36px;
+}
+
+.workbench__top {
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.workbench h1 {
+  margin: 10px 0;
+  font-size: clamp(26px, 3.4vw, 40px);
+  letter-spacing: -1.1px;
+}
+
+.workbench__description {
+  max-width: 720px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #a7abc1;
+}
+
+.docs-link {
+  color: #d7cdfd;
+  border: 1px solid #47415d;
+  padding: 12px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.preview-panel {
+  border: 1px solid #3c3b4b;
+  border-radius: 18px;
+  background: #0c0d17;
+  overflow: hidden;
+}
+
+.preview-panel__toolbar {
+  flex-wrap: wrap;
+  padding: 20px 28px;
+  border-bottom: 1px solid #252738;
+}
+
+.preview-panel__toolbar strong, .preview-panel__toolbar small {
+  display: block;
+}
+
+.preview-panel__toolbar strong {
+  font-size: 15px;
+  margin: 8px 0 5px;
+}
+
+.preview-panel__toolbar small {
+  color: #979cb2;
+  font-size: 11px;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #181826;
+  padding: 5px;
+  border-radius: 9px;
+}
+
+.theme-toggle button {
+  border: 0;
+  border-radius: 7px;
+  color: #adafc1;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 10px 14px;
+}
+
+.theme-toggle button.is-selected {
+  color: white;
+  background: #5931de;
+}
+
+.price-chart {
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #0a0b14;
+}
+
+.price-chart[data-theme="light"] {
+  color: #212032;
+  background: #f5f4fb;
+}
+
+.price-chart[data-theme="colorful"] {
+  color: #fff4d5;
+  background: #17102c;
+}
+
+.price-chart__pending {
+  text-align: center;
+  max-width: 560px;
+}
+
+.price-chart__glyph {
+  color: #895bff;
+  font-size: 56px;
+  margin-bottom: 8px;
+}
+
+.price-chart__pending strong,
+.price-chart__pending > span {
+  display: block;
+}
+
+.price-chart__pending strong {
+  font-size: 17px;
+  margin-bottom: 7px;
+}
+
+.price-chart__pending > span {
+  font-size: 12px;
+  line-height: 1.8;
+  opacity: 0.65;
+}
+
+.price-chart__debug {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.price-chart__debug span {
+  padding: 7px 9px;
+  border-radius: 6px;
+  background: #39354829;
+  border: 1px solid #73699b55;
+  font-size: 10px;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+.preview-panel__footer, .app-footer {
+  color: #81869f;
+  font-size: 11px;
+}
+
+.preview-panel__footer {
+  padding: 13px 27px;
+  border-top: 1px solid #252738;
+}
+
+.app-footer {
+  padding-top: 24px;
+}
+
+@media (max-width: 760px) {
+  .workbench__top, .preview-panel__toolbar, .app-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .preview-panel__toolbar { padding: 18px; }
+  .theme-toggle { flex-wrap: wrap; }
+  .app-shell { padding: 18px; }
+  .status-tag { display: none; }
+}
