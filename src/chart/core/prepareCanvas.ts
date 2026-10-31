@@ -4,8 +4,8 @@ export const prepareCanvas = (canvas: HTMLCanvasElement, ctx: CanvasRenderingCon
   const padding = 20;
   const dpr = window.devicePixelRatio || 1;
 
-  const plotWidth = width - padding * 2;
-  const plotHeight = height - padding * 2;
+  const plotWidth = width - padding - 70;
+  const plotHeight = height - padding - 35;
 
   canvas.style.width = `${width}px`;
   canvas.style.height = `${height}px`;

@@ -3,6 +3,9 @@ import { useEffect, useRef } from 'react';
 import { getPriceDomain } from '../core/getPriceDomain.ts';
 import { prepareCanvas } from '../core/prepareCanvas.ts';
 import { renderPoints } from '../core/renderPoints.ts';
+import { renderArea } from '../core/renderArea.ts';
+import { renderPriceAxis } from '../core/renderPriceAxis.ts';
+import { renderTimeAxis } from '../core/renderTimeAxis.ts';
 
 export interface PriceChartProps<T> {
   data: readonly T[];
@@ -42,8 +45,12 @@ export function PriceChart<T>({
     if (!domain) return;
 
     const { minPrice, maxPrice } = domain;
+
+    renderPriceAxis(ctx, minPrice, maxPrice, padding, plotWidth, plotHeight);
+    renderArea(ctx, data, getValue, padding, plotHeight, plotWidth, maxPrice, minPrice);
     renderPoints(ctx, data, getValue, padding, plotHeight, plotWidth, maxPrice, minPrice);
-  }, [data, getValue]);
+    renderTimeAxis(ctx, data, getTime, padding, plotWidth, plotHeight);
+  }, [data, getValue, getTime]);
 
   return (
     <section
