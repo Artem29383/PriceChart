@@ -152,7 +152,7 @@ export function PerformanceMonitor({ counters, running, onSafetyPause }: Monitor
         <div><span>Худший React render</span><strong>{snapshot.maxReactRenderMs} <i>мс</i></strong><small>одна панель, actualDuration</small></div>
         <div><span>JS Heap</span><strong>{snapshot.heapMB ?? '—'} <i>{snapshot.heapMB === null ? '' : 'MB'}</i></strong><small>{snapshot.heapMB === null ? 'Только Chromium при доступности API' : 'usedJSHeapSize, приблизительно'}</small></div>
       </div>
-      <p className="stress-monitor__note" role="status">{status} FPS измеряется через rAF и не равен точной частоте обновления экрана. React Profiler показывает длительность React render, не стоимость браузерного paint.</p>
+      <p className="stress-monitor__note" role="status">{status} FPS измеряется через rAF и не равен точной частоте обновления экрана. React Profiler показывает только React render (не paint); в обычной production-сборке его события могут быть отключены — значение 0 не означает нулевую стоимость рендера.</p>
     </section>
   );
 }

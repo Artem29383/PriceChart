@@ -66,7 +66,7 @@ npm run build
 npm run preview
 ```
 
-Dev-сервер + React StrictMode и React DevTools сами добавляют накладные
+React Profiler в обычной production-сборке React отключён, поэтому там \`React render\` и \`React commits\` могут оставаться нулевыми. Для этих метрик используй dev-режим или специальную profiling-сборку.\n\nDev-сервер + React StrictMode и React DevTools сами добавляют накладные
 расходы, и это **другие** измерительные условия. Для глубокого анализа
 React-компонентов можно отдельно использовать React DevTools Profiler
 в режиме разработки. Сравнивай только результаты одной и той же конфигурации
